@@ -1,9 +1,12 @@
 ---
-import DataList from "../components/DataList/index.astro";
 import Layout from "src/layouts/Layout.astro";
+import List from "../components/DataList/List.astro";
 import { regionData } from "../regionData";
 ---
 
 <Layout>
-  <DataList data={regionData} />
+  <div class="container mx-auto max-w-lg">
+    <h1 class="mb-10 text-center font-serif text-4xl">Indeks Mesta</h1>
+    <List data={regionData} title="Regioni" />
+  </div>
 </Layout>

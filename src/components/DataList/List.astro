@@ -1,9 +1,9 @@
 ---
-import type { regionData } from "src/regionData";
+import type { Groblje, Okrug, Opstina, Region } from "src/types";
 import Sublist from "./Sublist.astro";
 
 interface Props {
-  data: typeof regionData;
+  data: Region[] | Okrug[] | Opstina[] | Groblje[];
   title: string;
 }
 

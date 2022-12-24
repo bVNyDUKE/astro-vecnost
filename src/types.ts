@@ -27,7 +27,7 @@ export interface RegionData {
   okrugname: string;
 }
 
-export interface IPerson {
+export interface Person {
   id: string;
   ime: string;
   prezime: string;
@@ -48,17 +48,6 @@ export interface IPerson {
     };
   };
 }
-
-// export interface IGraveLocations {
-//   id: number;
-//   name: string;
-//   position: google.maps.LatLngLiteral;
-// }
-
-// export interface IMapProps extends google.maps.MapOptions {
-//   locations: IGraveLocations[];
-//   children?: React.ReactNode;
-// }
 
 export interface Groblje {
   id: number;
@@ -81,40 +70,4 @@ export interface Region {
   id: number;
   name: string;
   okrug: Okrug[];
-}
-
-export interface IOkrug {
-  path: string;
-  name: string;
-  id: number;
-}
-
-interface Stat {
-  total: number;
-  percent: number;
-}
-
-export interface NameStat extends Stat {
-  name: string;
-}
-
-export interface LastnameStat extends Stat {
-  lastname: string;
-}
-
-export interface Graveyards {
-  id: number;
-  name: string;
-}
-
-export interface PersonsPerOkrugStat {
-  count: number;
-  okrug_id: number;
-  name: string;
-}
-
-export interface IGenStats {
-  male: number;
-  female: number;
-  na: number;
 }
