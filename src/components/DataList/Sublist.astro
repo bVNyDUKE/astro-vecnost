@@ -1,0 +1,45 @@
+---
+import type { Region, Okrug, Opstina, Groblje } from "src/types";
+import List from "./List.astro";
+
+interface Props {
+  entry: Region | Okrug | Opstina | Groblje;
+}
+
+const { entry } = Astro.props;
+let sublistData: undefined | { id: number; name: string }[] | false = false;
+let sublistName: false | "Okruzi" | "Opštine" | "Groblja" = false;
+
+switch (true) {
+  case Object.hasOwn(entry, "okrug"): {
+    sublistData = entry.okrug;
+    sublistName = "Okruzi";
+    break;
+  }
+  case "opstina" in entry: {
+    sublistData = entry.opstina;
+    sublistName = "Opštine";
+    break;
+  }
+  case "groblje" in entry: {
+    sublistData = entry.groblje;
+    sublistName = "Groblja";
+    break;
+  }
+}
+---
+
+{
+  sublistName ? (
+    <li>
+      <details>
+        <summary class="ml-2 hover:cursor-pointer">{entry.name}</summary>
+        <div>
+          {sublistData && <List data={sublistData} title={sublistName} />}
+        </div>
+      </details>
+    </li>
+  ) : (
+    <li>{entry.name}</li>
+  )
+}

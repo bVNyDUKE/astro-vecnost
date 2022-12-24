@@ -1,0 +1,15 @@
+---
+import type { regionData } from "src/regionData";
+import List from "./List.astro";
+
+interface Props {
+  data: typeof regionData;
+}
+
+const { data } = Astro.props;
+---
+
+<div class="container mx-auto max-w-lg">
+  <h1 class="mb-10 text-center font-serif text-4xl">Indeks Mesta</h1>
+  <List data={data} title="Regioni" />
+</div>
