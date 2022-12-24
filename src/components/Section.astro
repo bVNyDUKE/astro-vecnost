@@ -1,0 +1,53 @@
+---
+interface Props {
+  imgSrc: string;
+  title: string;
+  content: string;
+  href: string;
+  linkLabel: string;
+}
+
+const { imgSrc, title, content, href, linkLabel } = Astro.props;
+---
+
+<div class="group mx-auto mb-10 max-w-sm md:w-3/6 lg:mb-0 lg:w-3/12">
+  <section
+    class="relative flex h-64 flex-col overflow-hidden md:h-[240px] xl:h-[350px]"
+  >
+    <img
+      src={imgSrc}
+      alt="image"
+      class="t-0 l-0 z-05 absolute w-full object-cover"
+    />
+    <div
+      class="align-center visible z-10 flex grow flex-col justify-center p-5 transition delay-150 ease-in-out md:invisible md:group-hover:visible"
+    >
+      <div class="text-center text-white">
+        <div class="mx-auto w-48 text-center text-lg font-semibold md:text-xl">
+          {content}
+        </div>
+        <div class="mt-5 text-sm">
+          <a
+            href={href}
+            class="hover:pointer rounded-md bg-white px-7 py-2 text-center font-bold uppercase text-primary-dark shadow-md hover:shadow-lg active:bg-[#404040]"
+          >
+            {linkLabel}
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="z-10 hidden py-5 md:block">
+      <div class="font-bold">
+        <h2
+          class="text-center font-serif font-semibold uppercase text-white md:text-2xl"
+        >
+          {title}
+        </h2>
+      </div>
+    </div>
+    <div
+      class="absolute bottom-0 h-36 w-full bg-gradient-to-t from-[#000] group-hover:h-full"
+    >
+    </div>
+  </section>
+</div>
