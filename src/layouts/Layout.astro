@@ -38,9 +38,20 @@ import Header from "../components/Header.astro";
   </body>
 </html>
 <style is:global>
-  main {
-    min-height: 100vh;
+  html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  main {
+    flex: 1 0 auto;
+    margin-bottom: 50px;
+  }
+  footer {
+    flex-shrink: 0;
   }
 </style>
