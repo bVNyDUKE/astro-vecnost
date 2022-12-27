@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import type { RegionData } from "../../types";
 import { Magnifier, AdjustmentsIcon } from "../Icons";
@@ -44,7 +44,6 @@ export default function SearchBar({
     groblje,
     okrug,
   });
-
   const availableFilters = ((): AvailableFilters => {
     const dropdownOptions = Object.create(AcceptedFilters);
 
@@ -85,7 +84,7 @@ export default function SearchBar({
     if (selectedFilters.opstina) {
       url += `&opstina=${selectedFilters.opstina}`;
     }
-    if (selectedFilters.groblje) {
+    if (selectedFilters.okrug) {
       url += `&okrug=${selectedFilters.okrug}`;
     }
 

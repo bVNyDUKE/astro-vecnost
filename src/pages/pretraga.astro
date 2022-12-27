@@ -6,15 +6,16 @@ import SearchBar from "../components/Search/SearchBar";
 import { sp } from "../supabase";
 
 const { data: options } = await sp.rpc("region_data");
+console.log(options);
 
 const ime = Astro.url.searchParams.get("ime") ?? "";
 const groblje = Astro.url.searchParams.get("groblje");
 const opstina = Astro.url.searchParams.get("opstina");
 const okrug = Astro.url.searchParams.get("okrug");
-const page = parseInt(Astro.url.searchParams.get("page") || "1") ?? 1;
+const page = +(Astro.url.searchParams.get("page") || 1);
 
-const rangeFrom = (+page - 1) * 10 || 0;
-const rangeTo = +page * 10 || 10;
+const rangeFrom = page - 1 * 10 || 0;
+const rangeTo = page * 10 || 10;
 let query = sp
   .from("persons")
   .select(
@@ -50,7 +51,7 @@ if (ime !== undefined && ime !== "") {
   results = data;
   resultCount = count;
 }
-const pages = Math.ceil(resultCount ?? 1 / 20);
+const pages = Math.ceil(resultCount ?? 1 / 10);
 ---
 
 <Layout>
