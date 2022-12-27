@@ -1,3 +1,12 @@
+export interface RegionData {
+  grobljeid: string;
+  grobljename: string;
+  opstinaid: string;
+  opstinaname: string;
+  okrugid: string;
+  okrugname: string;
+}
+
 export interface SearchResult {
   id: string;
   ime: string;

@@ -1,0 +1,80 @@
+---
+import Paginator from "src/components/Search/Paginator";
+import ResultList from "src/components/Search/ResultList.astro";
+import Layout from "src/layouts/Layout.astro";
+import type { RegionData, SearchResult } from "src/types";
+import SearchBar from "../components/Search/SearchBar";
+import { sp } from "../supabase";
+
+const { data: options } = await sp.rpc("region_data");
+
+const ime = Astro.url.searchParams.get("ime") ?? "";
+const groblje = Astro.url.searchParams.get("groblje");
+const opstina = Astro.url.searchParams.get("opstina");
+const okrug = Astro.url.searchParams.get("okrug");
+const page = parseInt(Astro.url.searchParams.get("page") || "1") ?? 1;
+
+const rangeFrom = (+page - 1) * 10 || 0;
+const rangeTo = +page * 10 || 10;
+let query = sp
+  .from("persons")
+  .select(
+    "id, ime, prezime, rodjenje, smrt, groblje!inner(id, name, opstina!inner(id, name, okrug!inner(id,name)))",
+    {
+      count: "exact",
+    }
+  )
+  .limit(10)
+  .range(rangeFrom, rangeTo);
+
+if (ime && typeof ime === "string" && ime !== "all") {
+  query = query.textSearch("fts", ime as string, {
+    config: "sr",
+    type: "websearch",
+  });
+}
+
+if (groblje) {
+  query = query.eq("groblje.id", groblje);
+}
+if (opstina) {
+  query = query.eq("groblje.opstina.id", opstina);
+}
+if (okrug) {
+  query = query.eq("groblje.opstina.okrug.id", okrug);
+}
+
+let results,
+  resultCount = null;
+if (ime !== undefined && ime !== "") {
+  const { data, count } = await query;
+  results = data;
+  resultCount = count;
+}
+---
+
+<Layout>
+  <div class="container mx-auto max-w-3xl">
+    <SearchBar
+      ime={ime}
+      groblje={groblje}
+      opstina={opstina}
+      okrug={okrug}
+      options={options as RegionData[]}
+      client:load
+    />
+    <div class="relative my-5 flex justify-center">
+      <ResultList results={results as SearchResult[]} />
+    </div>
+  </div>
+  {
+    results && resultCount !== null && resultCount > 10 && (
+      <Paginator
+        page={page}
+        count={resultCount || 0}
+        perPage={10}
+        client:load
+      />
+    )
+  }
+</Layout>
