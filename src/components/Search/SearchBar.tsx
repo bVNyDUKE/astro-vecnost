@@ -36,7 +36,9 @@ export default function SearchBar({
   icon = <Magnifier />,
 }: SearchBarProps) {
   const [parent] = useAutoAnimate<HTMLDivElement>();
-  const [filtersShown, setFiltersShown] = useState(false);
+  const [filtersShown, setFiltersShown] = useState(
+    opstina || groblje || okrug ? true : false
+  );
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>({
     opstina,
     groblje,
@@ -109,7 +111,7 @@ export default function SearchBar({
               type="text"
               name="search"
               id="search"
-              value={searchInput}
+              value={searchInput ?? ""}
               onChange={(e) => setSearchInput(e.target.value)}
               placeholder="Pretraga..."
               className="h-full flex-grow p-5 focus:outline-none"

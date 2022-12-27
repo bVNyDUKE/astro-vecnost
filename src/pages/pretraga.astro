@@ -1,5 +1,4 @@
 ---
-import Paginator from "src/components/Search/Paginator";
 import ResultList from "src/components/Search/ResultList.astro";
 import Layout from "src/layouts/Layout.astro";
 import type { RegionData, SearchResult } from "src/types";
@@ -51,6 +50,7 @@ if (ime !== undefined && ime !== "") {
   results = data;
   resultCount = count;
 }
+const pages = Math.ceil(resultCount ?? 1 / 20);
 ---
 
 <Layout>
@@ -69,12 +69,66 @@ if (ime !== undefined && ime !== "") {
   </div>
   {
     results && resultCount !== null && resultCount > 10 && (
-      <Paginator
-        page={page}
-        count={resultCount || 0}
-        perPage={10}
-        client:load
-      />
+      <div class="mb-5 flex justify-center">
+        <div class="flex justify-between">
+          <button
+            id="first"
+            data-page={1}
+            class="flex items-center justify-center px-4  py-2 text-sm font-medium hover:shadow-md disabled:text-gray-300 disabled:hover:shadow-none"
+            disabled={page === 1}
+          >
+            &lt;&lt;
+          </button>
+          <button
+            id="prev"
+            data-page={page - 1}
+            class="flex items-center justify-center  px-4 py-2 text-sm font-medium hover:shadow-md disabled:text-gray-300 disabled:hover:shadow-none"
+            disabled={page === 1}
+          >
+            &lt;
+          </button>
+          <div class="flex items-center">
+            <span class="text-sm font-medium">
+              Strana {page} od {pages}
+            </span>
+          </div>
+          <button
+            id="next"
+            data-page={page + 1}
+            class="flex items-center justify-center  px-4 py-2 text-sm font-medium hover:shadow-md disabled:text-gray-300 disabled:hover:shadow-none"
+            disabled={page === pages}
+          >
+            &gt;
+          </button>
+          <button
+            id="last"
+            data-page={pages}
+            class="flex items-center justify-center  px-4 py-2 text-sm font-medium hover:shadow-md disabled:text-gray-300 disabled:hover:shadow-none"
+            disabled={page === pages}
+          >
+            &gt;&gt;
+          </button>
+        </div>
+      </div>
     )
   }
 </Layout>
+
+<script lang="js">
+  const handlePageChange = (e) => {
+    const params = new URL(document.location.toString()).searchParams;
+    params.set("page", e.currentTarget?.dataset?.page);
+    window.history.pushState(
+      { ...window.history.state, page: e.currentTarget?.dataset.page },
+      ""
+    );
+    window.location.replace(
+      `${document.location.origin}/pretraga?${params.toString()}`
+    );
+  };
+
+  document.querySelector("#first")?.addEventListener("click", handlePageChange);
+  document.querySelector("#prev")?.addEventListener("click", handlePageChange);
+  document.querySelector("#next")?.addEventListener("click", handlePageChange);
+  document.querySelector("#last")?.addEventListener("click", handlePageChange);
+</script>
