@@ -6,7 +6,6 @@ import {
   BarElement,
   Legend,
   Tooltip,
-  ArcElement,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
@@ -18,8 +17,7 @@ ChartJS.register(
   Tooltip,
   ChartDataLabels,
   BarElement,
-  Legend,
-  ArcElement
+  Legend
 );
 
 export * from "./NamesGraph";
