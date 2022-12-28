@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { IOkrug, PersonsPerOkrugStat } from "../../types";
+import type { IOkrug, PersonsPerOkrugStat } from "../../types";
 import MapRegion from "./MapRegion";
 import { Okruzi } from "./MapData";
 

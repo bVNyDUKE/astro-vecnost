@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Bar } from "react-chartjs-2";
-import { NameStat } from "../../types";
+import type { NameStat } from "../../types";
 
 export const NamesGraph = ({ nameStats }: { nameStats: NameStat[] }) => {
   const labels = useMemo(() => nameStats.map((x) => x.name), [nameStats]);
