@@ -6,7 +6,6 @@ import SearchBar from "../components/Search/SearchBar";
 import { sp } from "../supabase";
 
 const { data: options } = await sp.rpc("region_data");
-console.log(options);
 
 const ime = Astro.url.searchParams.get("ime") ?? "";
 const groblje = Astro.url.searchParams.get("groblje");

@@ -1,4 +1,4 @@
-import { useState, FormEvent, useEffect } from "react";
+import { useState, FormEvent } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import type { RegionData } from "../../types";
 import { Magnifier, AdjustmentsIcon } from "../Icons";
