@@ -1,0 +1,14 @@
+---
+import StatPage from "src/components/StatPage";
+import Layout from "src/layouts/Layout.astro";
+import { sp } from "src/supabase";
+
+const [{ data: personsPerOkrug }, { data: genData }] = await Promise.all([
+  sp.rpc("persons_per_okrug"),
+  sp.rpc("gender_dist"),
+]);
+---
+
+<Layout>
+  <StatPage personsPerOkrug={personsPerOkrug} genData={genData} client:load />
+</Layout>

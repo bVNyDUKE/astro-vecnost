@@ -75,8 +75,44 @@ export interface Okrug {
   opstina: Opstina[];
 }
 
+export interface LastnameStat extends Stat {
+  lastname: string;
+}
+
+export interface Graveyards {
+  id: number;
+  name: string;
+}
+
+export interface IOkrug {
+  path: string;
+  name: string;
+  id: number;
+}
+
+interface Stat {
+  total: number;
+  percent: number;
+}
+
 export interface Region {
   id: number;
   name: string;
   okrug: Okrug[];
+}
+
+export interface NameStat extends Stat {
+  name: string;
+}
+
+export interface PersonsPerOkrugStat {
+  count: number;
+  okrug_id: number;
+  name: string;
+}
+
+export interface IGenStats {
+  male: number;
+  female: number;
+  na: number;
 }
