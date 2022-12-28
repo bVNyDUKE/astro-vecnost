@@ -1,0 +1,260 @@
+---
+import Layout from "src/layouts/Layout.astro";
+---
+
+<Layout>
+  <script
+    is:inline
+    src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"
+  ></script>
+  <script defer lang="js">
+    const locations = [
+      {
+        id: 30,
+        name: "Aleja narodnih heroja",
+        position: { lat: 44.80727178082158, lng: 20.491013923404996 },
+      },
+      {
+        id: 4,
+        name: "Aleja zaslužnih građana",
+        position: { lat: 44.80836122492284, lng: 20.487219938829835 },
+      },
+      {
+        id: 31,
+        name: "Novo groblje Beograd",
+        position: { lat: 44.810423047374776, lng: 20.48608996885179 },
+      },
+      {
+        id: 10,
+        name: "Jevrejsko aškenasko groblje Beograd",
+        position: { lat: 44.810904, lng: 20.4870585 },
+      },
+      {
+        id: 12,
+        name: "Jevrejsko sefardsko groblje Beograd",
+        position: { lat: 44.8110781, lng: 20.4863732 },
+      },
+      {
+        id: 21,
+        name: "Groblje manastira Sv. arh. Stefana Sombor",
+        position: { lat: 45.77826686, lng: 19.13404853 },
+      },
+      {
+        id: 3,
+        name: "Aleja velikana",
+        position: { lat: 44.8083646, lng: 20.4871989 },
+      },
+      {
+        id: 2,
+        name: "Grobnica narodnih heroja Jugoslavije",
+        position: { lat: 44.8219174, lng: 20.4488906 },
+      },
+      {
+        id: 5,
+        name: "Austrougarsko vojno groblje",
+        position: { lat: 44.8062059, lng: 20.4926888 },
+      },
+      {
+        id: 22,
+        name: "Crvenoarmejsko groblje Sombor",
+        position: { lat: 45.77855883, lng: 19.13376958 },
+      },
+      {
+        id: 23,
+        name: "Partizansko groblje Sombor",
+        position: { lat: 45.77851969, lng: 19.13320632 },
+      },
+      {
+        id: 32,
+        name: "Jevrejsko groblje Vršac",
+        position: { lat: 45.11879980090336, lng: 21.28248610097828 },
+      },
+      {
+        id: 33,
+        name: "Katoličko groblje Vršac",
+        position: { lat: 45.118162913373375, lng: 21.282456596705515 },
+      },
+      {
+        id: 34,
+        name: "Muslimansko groblje Vršac",
+        position: { lat: 45.11484776579752, lng: 21.282255430970572 },
+      },
+      {
+        id: 35,
+        name: "Rumunsko groblje Vršac",
+        position: { lat: 45.11750614522316, lng: 21.28293537100796 },
+      },
+      {
+        id: 36,
+        name: "Vršačko groblje",
+        position: { lat: 45.11588909104404, lng: 21.28222690407486 },
+      },
+      {
+        id: 37,
+        name: "Groblje Banatski Karlovac",
+        position: { lat: 45.053639106224075, lng: 21.008967874342243 },
+      },
+      {
+        id: 38,
+        name: "Groblje Parcani",
+        position: { lat: 44.56300859705575, lng: 20.518029779130146 },
+      },
+      {
+        id: 9,
+        name: "Italijansko vojno groblje",
+        position: { lat: 44.8059228, lng: 20.4905658 },
+      },
+      {
+        id: 39,
+        name: "Katoličko groblje Surčin",
+        position: { lat: 44.79730873539611, lng: 20.28844211906949 },
+      },
+      {
+        id: 40,
+        name: "Pravoslavno groblje Surčin",
+        position: { lat: 44.792923352221564, lng: 20.25800441134359 },
+      },
+      {
+        id: 41,
+        name: "Groblje Veliko Gradište",
+        position: { lat: 44.7583429, lng: 21.5253141 },
+      },
+      {
+        id: 15,
+        name: "Groblje oslobodilaca Beograda",
+        position: { lat: 44.810745, lng: 20.4853959 },
+      },
+      {
+        id: 42,
+        name: "Francusko vojno groblje",
+        position: { lat: 44.808987, lng: 20.484199 },
+      },
+      {
+        id: 24,
+        name: "Britansko vojno groblje",
+        position: { lat: 44.8057468, lng: 20.4913181 },
+      },
+      {
+        id: 11,
+        name: "Jevrejsko groblje Zemun",
+        position: { lat: 44.848908, lng: 20.4057161 },
+      },
+      {
+        id: 20,
+        name: "Zemunsko groblje",
+        position: { lat: 44.8486925, lng: 20.407563 },
+      },
+      {
+        id: 8,
+        name: "Groblje hrama Sv. Nikolaja Lelić",
+        position: { lat: 44.22740765, lng: 19.83327799 },
+      },
+      {
+        id: 7,
+        name: "Groblje crkve Sv. Arhanđela Brankovina",
+        position: { lat: 44.35285562, lng: 19.8952078 },
+      },
+      {
+        id: 18,
+        name: "Staro groblje Donja Crnišava",
+        position: { lat: 43.57837368, lng: 21.04297242 },
+      },
+      {
+        id: 14,
+        name: "Novo groblje Donja Crnišava",
+        position: { lat: 43.58604234, lng: 21.05240073 },
+      },
+      {
+        id: 25,
+        name: "Žarkovačko groblje",
+        position: { lat: 44.7536042, lng: 20.4126855 },
+      },
+      {
+        id: 6,
+        name: "Gradsko groblje Vrnjačka Banja",
+        position: { lat: 43.62353569, lng: 20.88555459 },
+      },
+      {
+        id: 13,
+        name: "Grobnica narodnih heroja Jugoslavije",
+        position: { lat: 44.8219174, lng: 20.4488906 },
+      },
+      {
+        id: 26,
+        name: "Grabičko groblje Banja Koviljača",
+        position: { lat: 44.5116982, lng: 19.1440905 },
+      },
+      {
+        id: 16,
+        name: "Stanovljansko groblje Kragujevac",
+        position: { lat: 44.0009122, lng: 20.8853409 },
+      },
+      {
+        id: 27,
+        name: "Staro spomen groblje Vrdnik",
+        position: { lat: 45.13343144, lng: 19.79097414 },
+      },
+      {
+        id: 1,
+        name: "Groblje 1300 kaplara Bukovik",
+        position: { lat: 44.32755339, lng: 20.52203898 },
+      },
+      {
+        id: 17,
+        name: "Staro bežanijsko groblje",
+        position: { lat: 44.810362, lng: 20.3722066 },
+      },
+      {
+        id: 19,
+        name: "Staro katoličko groblje Novi Sad",
+        position: { lat: 45.2476151, lng: 19.8285365 },
+      },
+      {
+        id: 28,
+        name: "Staro groblje Bučje",
+        position: { lat: 43.54831994, lng: 21.05020097 },
+      },
+      {
+        id: 29,
+        name: "Novo groblje Bučje",
+        position: { lat: 43.54909561, lng: 21.04889205 },
+      },
+    ];
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 7,
+        center: { lat: 44.628924, lng: 20.643159 },
+      });
+      const infoWindow = new google.maps.InfoWindow({
+        content: "",
+        disableAutoPan: true,
+      });
+      const markers = locations.map(({ position, name, id }) => {
+        const marker = new google.maps.Marker({
+          position: position,
+          label: id.toString(),
+        });
+
+        const infoContent = `<div class="py-4 px-2">
+          <h1 class="font-bold text-lg">${name}</h1>
+          <a class="underline hover:cursor-pointer" href="/pretraga?ime=all&groblje=${id}">Pretrazi ovo groblje</h1>
+            </div>`;
+
+        marker.addListener("click", () => {
+          infoWindow.setContent(infoContent);
+          infoWindow.open(map, marker);
+        });
+        return marker;
+      });
+      console.log(window.markerClusterer);
+      new window.markerClusterer.MarkerClusterer({ markers, map });
+    }
+    window.initMap = initMap;
+  </script>
+  <div id="map" class="flex min-h-screen"></div>
+  <script
+    is:inline
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0ThvNWgF8MzcDV5r-hIZ--WzVENqj72M&callback=initMap&v=weekly"
+    defer
+  ></script>
+</Layout>
