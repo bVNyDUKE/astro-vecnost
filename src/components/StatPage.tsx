@@ -78,10 +78,10 @@ export default function StatPage({
       >
         <div className="mx-auto my-10 h-1/2 max-w-xl space-y-5 lg:my-0 lg:mx-0 lg:mb-10 lg:h-full lg:w-1/2">
           <div className="relative h-1/2 w-[100vw] sm:w-full">
-            {/* <OkrugGraph personsPerOkrug={personsPerOkrug} /> */}
+            <OkrugGraph personsPerOkrug={personsPerOkrug} />
           </div>
           <div className="relative h-1/2 w-[100vw] sm:w-full">
-            {/* <GenGraph genStats={genData} /> */}
+            <GenGraph genStats={genData} />
           </div>
         </div>
         <MapContainer

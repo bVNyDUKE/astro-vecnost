@@ -8,7 +8,7 @@ import tailwind from "@astrojs/tailwind";
 import image from "@astrojs/image";
 
 // https://astro.build/config
-import vercel from "@astrojs/vercel/serverless";
+import netlify from "@astrojs/netlify/functions";
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,13 +16,13 @@ export default defineConfig({
   output: "server",
   vite: {
     build: {
-      target: ["es2020"]
+      target: ["es2020"],
     },
     optimizeDeps: {
       esbuildOptions: {
-        target: "es2020"
-      }
-    }
+        target: "es2020",
+      },
+    },
   },
-  adapter: vercel()
+  adapter: netlify(),
 });
