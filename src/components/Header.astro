@@ -1,10 +1,15 @@
+---
+import img from "../images/vecna-logo-solo-100.png";
+import { Image } from "@astrojs/image/components";
+---
+
 <nav>
   <div class="mb-10 hidden bg-white drop-shadow-md sm:block">
     <div class="container mx-auto items-center justify-between py-1.5 sm:flex">
       <a href="/">
         <div class="flex items-center justify-center">
-          <img
-            src="/img/vecna-logo-solo-100.png"
+          <Image
+            src={img}
             alt="Vecnost logo"
             class="hover:pointer object-contain"
             style={{ width: "60px" }}
