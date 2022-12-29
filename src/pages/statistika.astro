@@ -10,5 +10,9 @@ const [{ data: personsPerOkrug }, { data: genData }] = await Promise.all([
 ---
 
 <Layout>
-  <StatPage personsPerOkrug={personsPerOkrug} genData={genData} client:load />
+  <StatPage
+    personsPerOkrug={personsPerOkrug}
+    genData={genData}
+    client:only="react"
+  />
 </Layout>
