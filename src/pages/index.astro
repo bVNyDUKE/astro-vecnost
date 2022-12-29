@@ -1,9 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "@astrojs/image/components";
 import Section from "../components/Section.astro";
-
-import img from "../images/vecna-logo-solo-100.png";
 
 const data = [
   {
@@ -43,8 +40,8 @@ const data = [
 
 <Layout title="Vecnost - Baza">
   <div class="container mx-auto text-center">
-    <Image
-      src={img}
+    <img
+      src="/img/vecna-logo-solo-100.png"
       alt="Vecnost logo"
       class="hover:pointer mx-auto object-contain"
       width="90px"
