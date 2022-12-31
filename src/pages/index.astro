@@ -2,12 +2,16 @@
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
 import img from "../images/vecna-logo-solo-100.png";
+import img1 from "../images/index_1.webp";
+import img2 from "../images/index_2.webp";
+import img3 from "../images/index_3.webp";
+import img4 from "../images/index_4.webp";
 import { Image } from "@astrojs/image/components";
 
 const data = [
   {
     id: 1,
-    imgSrc: "/img/index_1.webp",
+    imgSrc: img1,
     title: "Pretraga",
     content: "Pretražite sahranjena lica po imenu",
     href: "/pretraga",
@@ -15,7 +19,7 @@ const data = [
   },
   {
     id: 2,
-    imgSrc: "/img/index_2.webp",
+    imgSrc: img2,
     title: "Statistika",
     content: "Interkativna statistika",
     href: "/statistika",
@@ -23,7 +27,7 @@ const data = [
   },
   {
     id: 3,
-    imgSrc: "/img/index_3.webp",
+    imgSrc: img3,
     title: "Mapa",
     content: "Pronađite arhivirane lokacija na mapi",
     href: "/mapa",
@@ -31,7 +35,7 @@ const data = [
   },
   {
     id: 4,
-    imgSrc: "/img/index_4.webp",
+    imgSrc: img4,
     title: "Indeks",
     content: "Indeks svih arhiviranih lokacija",
     href: "/indeks",
