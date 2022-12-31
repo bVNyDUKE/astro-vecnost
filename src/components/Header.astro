@@ -3,7 +3,9 @@ import img from "../images/vecna-logo-solo-100.png";
 import { Image } from "@astrojs/image/components";
 ---
 
-<nav>
+<nav
+  class="sticky top-0 z-50 border-b bg-white sm:relative sm:z-0 sm:block sm:border-0 sm:bg-none"
+>
   <div class="mb-10 hidden bg-white drop-shadow-md sm:block">
     <div class="container mx-auto items-center justify-between py-1.5 sm:flex">
       <a href="/">
@@ -31,5 +33,12 @@ import { Image } from "@astrojs/image/components";
         <a href="/mapa">Mapa</a>
       </div>
     </div>
+  </div>
+  <div class="flex items-center justify-between p-5 text-gray-500 sm:hidden">
+    <a href="/">Početna</a>
+    <a href="/pretraga">Pretraga</a>
+    <a href="/statistika">Statistika</a>
+    <a href="/indeks">Indeks</a>
+    <a href="/mapa">Mapa</a>
   </div>
 </nav>
