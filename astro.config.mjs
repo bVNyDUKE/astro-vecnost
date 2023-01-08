@@ -5,10 +5,10 @@ import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
-import netlify from "@astrojs/netlify/functions";
+import image from "@astrojs/image";
 
 // https://astro.build/config
-import image from "@astrojs/image";
+import vercel from "@astrojs/vercel/serverless";
 
 // https://astro.build/config
 export default defineConfig({
@@ -30,5 +30,5 @@ export default defineConfig({
       },
     },
   },
-  adapter: netlify(),
+  adapter: vercel(),
 });
