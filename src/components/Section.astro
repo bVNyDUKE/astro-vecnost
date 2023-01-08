@@ -1,5 +1,5 @@
 ---
-import { Picture } from "@astrojs/image/components";
+import { Image } from "@astrojs/image/components";
 interface Props {
   imgSrc: string;
   title: string;
@@ -15,14 +15,7 @@ const { imgSrc, title, content, href, linkLabel } = Astro.props;
   <section
     class="relative flex h-64 flex-col overflow-hidden md:h-[240px] xl:h-[350px]"
   >
-    <Picture
-      src={imgSrc}
-      alt="image"
-      slot="((min-width: 20em) and (max-width: 29em)) 20em,((min-width: 30em) and (max-width: 50em)) 30em, (max-width: 30em) 30em"
-      widths={[150, 241, 305, 369]}
-      aspectRatio="369:415"
-      class="t-0 l-0 z-05 absolute w-full object-cover"
-    />
+    <Image src={imgSrc} alt="image" class="t-0 l-0 z-05 absolute" />
     <div
       class="align-center visible z-10 flex grow flex-col justify-center p-5 transition delay-150 ease-in-out md:invisible md:group-hover:visible"
     >
