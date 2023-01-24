@@ -20,15 +20,5 @@ export default defineConfig({
     }),
   ],
   output: "server",
-  vite: {
-    build: {
-      target: ["es2020"],
-    },
-    optimizeDeps: {
-      esbuildOptions: {
-        target: "es2020",
-      },
-    },
-  },
   adapter: vercel(),
 });
