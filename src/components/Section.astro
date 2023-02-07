@@ -15,7 +15,13 @@ const { imgSrc, title, content, href, linkLabel } = Astro.props;
   <section
     class="relative flex h-64 flex-col overflow-hidden md:h-[240px] xl:h-[350px]"
   >
-    <Image src={imgSrc} alt="image" class="t-0 l-0 z-05 absolute" />
+    <Image
+      height={356}
+      width={310}
+      src={imgSrc}
+      alt="image"
+      class="t-0 l-0 z-05 absolute"
+    />
     <div
       class="align-center visible z-10 flex grow flex-col justify-center p-5 transition delay-150 ease-in-out md:invisible md:group-hover:visible"
     >
