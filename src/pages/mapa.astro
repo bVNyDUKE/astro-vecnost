@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import Layout from "src/layouts/Layout.astro";
 ---
 
@@ -246,7 +248,6 @@ import Layout from "src/layouts/Layout.astro";
         });
         return marker;
       });
-      console.log(window.markerClusterer);
       new window.markerClusterer.MarkerClusterer({ markers, map });
     }
     window.initMap = initMap;
