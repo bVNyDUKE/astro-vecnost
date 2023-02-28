@@ -1,16 +1,12 @@
 ---
 import img from "../images/vecna-logo-solo-100.png";
 import { Image } from "@astrojs/image/components";
-
-
 ---
 
-
-
 <nav
-  class="sticky mb-10 top-0 z-50 border-b bg-white sm:relative sm:z-0 sm:block sm:border-0 sm:bg-none"
+  class="sticky top-0 z-50 mb-10 border-b bg-white sm:relative sm:z-0 sm:block sm:border-0 sm:bg-none"
 >
-  <div class=" hidden bg-white drop-shadow-md sm:block">
+  <div class="hidden bg-white drop-shadow-md sm:block">
     <div class="container mx-auto items-center justify-between py-1.5 sm:flex">
       <a href="/">
         <div class="flex items-center justify-center">
@@ -18,7 +14,8 @@ import { Image } from "@astrojs/image/components";
             src={img}
             alt="Vecnost logo"
             class="hover:pointer object-contain"
-            style={{ width: "60px" }}
+            width={65}
+            height={65}
           />
           <div
             class="text-2xl font-semibold sm:text-2xl"
@@ -42,60 +39,62 @@ import { Image } from "@astrojs/image/components";
     <div class="flex items-center justify-between">
       <a href="/" class="flex items-center gap-1">
         <Image
-              src={img}
-              alt="Vecnost logo"
-              class="hover:pointer object-contain"
-              style={{ width: "40px" }}
+          src={img}
+          alt="Vecnost logo"
+          class="hover:pointer object-contain"
+          width={40}
+          height={40}
         />
       </a>
- 
-      <div id="navBtn" data-open="false" class="space-y-2 cursor-pointer ">
-        <div class="w-8 h-0.5 bg-secondary-dark transition duration-500 ease-out"></div>
-        <div class="w-8 h-0.5 bg-secondary-dark transition duration-500 ease-out"></div>
-        <div class="w-8 h-0.5 bg-secondary-dark transition duration-500 ease-out"></div>
+      <div id="navBtn" data-open="false" class="cursor-pointer space-y-2">
+        {
+          Array.from({ length: 3 }).map(() => (
+            <div class="h-0.5 w-8 bg-secondary-dark transition duration-500 ease-out" />
+          ))
+        }
       </div>
     </div>
-    <div id="navMenu" class="transition duration-300 ease-out fixed w-screen h-screen p-12 bg-white left-0 top-[77px] overflow-hidden translate-x-full">
+    <div
+      id="navMenu"
+      class="fixed left-0 top-[77px] h-screen w-screen translate-x-full overflow-hidden bg-white p-12 transition duration-500 ease-out"
+    >
       <a class="block p-4 font-semibold uppercase" href="/">Početna</a>
       <a class="block p-4 font-semibold uppercase" href="/pretraga">Pretraga</a>
-      <a class="block p-4 font-semibold uppercase" href="/statistika">Statistika</a>
+      <a class="block p-4 font-semibold uppercase" href="/statistika"
+        >Statistika</a
+      >
       <a class="block p-4 font-semibold uppercase" href="/indeks">Indeks</a>
       <a class="block p-4 font-semibold uppercase" href="/mapa">Mapa</a>
     </div>
   </div>
 </nav>
 
-
 <script lang="js">
+  const navBtn = document.querySelector("#navBtn");
+  const navMenu = document.querySelector("#navMenu");
+  const first = navBtn.querySelector("div:nth-of-type(1)");
+  const second = navBtn.querySelector("div:nth-of-type(2)");
+  const third = navBtn.querySelector("div:nth-of-type(3)");
 
-  const navBtn = document.querySelector('#navBtn');
-  const navMenu = document.querySelector('#navMenu');
-  const first = navBtn.querySelector('div:nth-of-type(1)');
-  const second = navBtn.querySelector('div:nth-of-type(2)');
-  const third = navBtn.querySelector('div:nth-of-type(3)');
+  navBtn.addEventListener("click", () => {
+    const navVal = navBtn.getAttribute("data-open");
 
+    if (navVal == "false") {
+      navBtn.setAttribute("data-open", "true");
 
-  navBtn.addEventListener('click', ()=>{
-    const navVal = navBtn.getAttribute('data-open');
+      first.classList.add("translate-y-[10px]", "rotate-45");
+      second.classList.add("invisible");
+      third.classList.add("translate-y-[-10px]", "rotate-[-45deg]");
 
-    if(navVal == 'false'){
-    
-      navBtn.setAttribute('data-open', 'true');
+      navMenu.classList.remove("translate-x-full");
+    } else {
+      navBtn.setAttribute("data-open", "false");
 
-      first.classList.add('translate-y-[10px]' , 'rotate-45');
-      second.classList.add('invisible')
-      third.classList.add('translate-y-[-10px]' , 'rotate-[-45deg]');
+      first.classList.remove("translate-y-[10px]", "rotate-45");
+      second.classList.remove("invisible");
+      third.classList.remove("translate-y-[-10px]", "rotate-[-45deg]");
 
-      navMenu.classList.remove('translate-x-full');
+      navMenu.classList.add("translate-x-full");
     }
-    else {
-      navBtn.setAttribute('data-open', 'false');
-
-      first.classList.remove('translate-y-[10px]' , 'rotate-45');
-      second.classList.remove('invisible')
-      third.classList.remove('translate-y-[-10px]' , 'rotate-[-45deg]');
-
-      navMenu.classList.add('translate-x-full');
-    }
-  })
+  });
 </script>
