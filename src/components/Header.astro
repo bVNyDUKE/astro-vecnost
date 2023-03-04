@@ -56,7 +56,7 @@ import { Image } from "@astrojs/image/components";
     </div>
     <div
       id="navMenu"
-      class="fixed left-0 top-[77px] h-screen w-screen translate-x-full overflow-hidden bg-white p-12 transition duration-500 ease-out"
+      class="fixed left-0 top-[73px] h-screen w-screen translate-x-full overflow-hidden bg-white p-12 transition duration-500 ease-out"
     >
       <a class="block p-4 font-semibold uppercase" href="/">Početna</a>
       <a class="block p-4 font-semibold uppercase" href="/pretraga">Pretraga</a>
@@ -81,6 +81,7 @@ import { Image } from "@astrojs/image/components";
 
     if (navVal == "false") {
       navBtn.setAttribute("data-open", "true");
+      document.body.style.overflow = "hidden";
 
       first.classList.add("translate-y-[10px]", "rotate-45");
       second.classList.add("invisible");
@@ -89,6 +90,7 @@ import { Image } from "@astrojs/image/components";
       navMenu.classList.remove("translate-x-full");
     } else {
       navBtn.setAttribute("data-open", "false");
+      document.body.removeAttribute("style");
 
       first.classList.remove("translate-y-[10px]", "rotate-45");
       second.classList.remove("invisible");
