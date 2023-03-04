@@ -115,7 +115,10 @@ export default function StatPage({
                 <p className="mb-5 text-2xl font-bold">Groblja</p>
                 <ul className="box-border space-y-1">
                   {grobljeStats.map((graveyard) => (
-                    <a href={`/pretraga?groblje=${graveyard.id}`}>
+                    <a
+                      key={graveyard.id}
+                      href={`/pretraga?groblje=${graveyard.id}`}
+                    >
                       <li className="box-border border p-8 hover:cursor-pointer hover:shadow-md">
                         <a>{graveyard.name}</a>
                       </li>

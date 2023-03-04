@@ -17,5 +17,34 @@ module.exports = {
         // "astro/no-set-html-directive": "error"
       },
     },
+    {
+      files: ["*.tsx"],
+      parser: "@typescript-eslint/parser",
+      parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: "module",
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      extends: ["plugin:react-hooks/recommended", "plugin:react/recommended"],
+      settings: {
+        react: {
+          version: "detect",
+        },
+        "import/resolver": {
+          node: {
+            paths: ["src"],
+            extensions: [".js", ".jsx", ".ts", ".tsx"],
+          },
+        },
+      },
+      rules: {
+        "react/react-in-jsx-scope": "off",
+        "react/prop-types": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+      },
+    },
   ],
 };
