@@ -1,7 +1,7 @@
 ---
-import Layout from "src/layouts/Layout.astro";
-import { sp } from "src/supabase";
-import type { Person } from "src/types";
+import Layout from "layouts/Layout.astro";
+import { sp } from "supabase";
+import type { Person } from "types";
 
 const { id } = Astro.params;
 const res = await sp
@@ -16,7 +16,7 @@ if (res.data && res.data.length === 0) {
   return Astro.redirect("/404");
 }
 
-const result = res.data[0] as Person;
+const result = res?.data?.[0] as Person;
 ---
 
 <Layout>

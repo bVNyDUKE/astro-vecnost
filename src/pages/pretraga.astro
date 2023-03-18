@@ -1,9 +1,9 @@
 ---
-import ResultList from "src/components/Search/ResultList.astro";
-import Layout from "src/layouts/Layout.astro";
-import type { RegionData, SearchResult } from "src/types";
-import SearchBar from "../components/Search/SearchBar";
-import { sp } from "../supabase";
+import ResultList from "components/Search/ResultList.astro";
+import Layout from "layouts/Layout.astro";
+import type { RegionData, SearchResult } from "types";
+import SearchBar from "components/Search/SearchBar";
+import { sp } from "supabase";
 
 const { data: options } = await sp.rpc("region_data");
 

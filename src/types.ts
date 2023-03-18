@@ -116,3 +116,14 @@ export interface IGenStats {
   female: number;
   na: number;
 }
+
+export interface IMapProps extends google.maps.MapOptions {
+  locations: IGraveLocations[];
+  children?: React.ReactNode;
+}
+
+export interface IGraveLocations {
+  id: number;
+  name: string;
+  position: google.maps.LatLngLiteral;
+}
