@@ -27,33 +27,30 @@ interface IMapProps extends google.maps.MapOptions {
 
 const center = { lat: 44.628924, lng: 20.643159 };
 const zoom = 8;
-const Map = ({ children, locations, stats, ...props }: IMapProps) => {
+const Map = ({ children, locations, stats }: IMapProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<google.maps.Map>();
 
-  const handleRegionClick = useCallback((event: any) => {
-    let feature = event.features[0] as google.maps.PlaceFeature;
-    if (!feature.placeId) return;
-  }, []);
-
   useEffect(() => {
     if (ref.current && !map) {
-      const newMap = new window.google.maps.Map(ref.current, {
+      const map = new window.google.maps.Map(ref.current, {
         center,
         zoom,
         mapId: "a579ad6779525e65",
       });
 
-      const okrugLayer = newMap.getFeatureLayer(
+      const okrugLayer = map.getFeatureLayer(
         google.maps.FeatureType.ADMINISTRATIVE_AREA_LEVEL_2
       );
 
-      okrugLayer.addListener("click", handleRegionClick);
+      okrugLayer.addListener("click", (event: any) => {
+        let feature = event.features[0] as google.maps.PlaceFeature;
+        if (!feature.placeId) return;
+      });
+
       okrugLayer.style = (styleOpts) => {
-        const okrugData = stats.find(
-          (x) =>
-            x.mapId === (styleOpts.feature as google.maps.PlaceFeature).placeId
-        );
+        const feat = styleOpts.feature as google.maps.PlaceFeature;
+        const okrugData = stats.find((x) => x.mapId === feat.placeId);
 
         if (!okrugData) {
           return null;
@@ -90,16 +87,16 @@ const Map = ({ children, locations, stats, ...props }: IMapProps) => {
 
         marker.addListener("click", () => {
           infoWindow.setContent(infoContent);
-          infoWindow.open(newMap, marker);
+          infoWindow.open(map, marker);
         });
 
         return marker;
       });
 
-      new MarkerClusterer({ map: newMap, markers });
-      setMap(newMap);
+      new MarkerClusterer({ map: map, markers });
+      setMap(map);
     }
-  }, [ref, stats, handleRegionClick, map, locations]);
+  }, [ref, stats, map, locations]);
 
   return (
     <>
@@ -127,7 +124,6 @@ type MapPageProps = {
 };
 
 const MapPage: React.FC<MapPageProps> = ({ data, stats }) => {
-
   if (data === null) {
     return <div>Error</div>;
   }
