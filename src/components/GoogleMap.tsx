@@ -9,44 +9,39 @@ import {
 } from "react";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { MarkerClusterer } from "@googlemaps/markerclusterer";
-import type { IGraveLocations } from "types";
+import type { IGraveLocations, OkrugMapData } from "types";
+import { StatDisplay } from "./StatsDisplay";
+import { useHashModal } from "useHashModal";
 
-type PerOkrugStat = {
-  id: number;
-  name: string;
-  mapId: string;
-  count: number;
-  fillColor: string;
-};
-
-interface IMapProps extends google.maps.MapOptions {
+interface MapProps extends google.maps.MapOptions {
   locations: IGraveLocations[];
-  stats: PerOkrugStat[];
+  stats: OkrugMapData[];
   children?: React.ReactNode;
+  onMapClick: (okrug: OkrugMapData) => void;
 }
 
 const center = { lat: 44.628924, lng: 20.643159 };
 const zoom = 8;
-const Map = ({ children, locations, stats }: IMapProps) => {
+const Map: React.FC<MapProps> = ({
+  children,
+  locations,
+  stats,
+  onMapClick,
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<google.maps.Map>();
 
   useEffect(() => {
     if (ref.current && !map) {
-      const map = new window.google.maps.Map(ref.current, {
+      const googleMap = new window.google.maps.Map(ref.current, {
         center,
         zoom,
         mapId: "a579ad6779525e65",
       });
 
-      const okrugLayer = map.getFeatureLayer(
+      const okrugLayer = googleMap.getFeatureLayer(
         google.maps.FeatureType.ADMINISTRATIVE_AREA_LEVEL_2
       );
-
-      okrugLayer.addListener("click", (event: any) => {
-        let feature = event.features[0] as google.maps.PlaceFeature;
-        if (!feature.placeId) return;
-      });
 
       okrugLayer.style = (styleOpts) => {
         const feat = styleOpts.feature as google.maps.PlaceFeature;
@@ -87,16 +82,25 @@ const Map = ({ children, locations, stats }: IMapProps) => {
 
         marker.addListener("click", () => {
           infoWindow.setContent(infoContent);
-          infoWindow.open(map, marker);
+          infoWindow.open(googleMap, marker);
         });
 
         return marker;
       });
 
-      new MarkerClusterer({ map: map, markers });
-      setMap(map);
+      new MarkerClusterer({ map: googleMap, markers });
+      setMap(googleMap);
     }
-  }, [ref, stats, map, locations]);
+  }, [stats, map, locations]);
+
+  useEffect(() => {
+    if (map) {
+      const okrugLayer = map.getFeatureLayer(
+        google.maps.FeatureType.ADMINISTRATIVE_AREA_LEVEL_2
+      );
+      okrugLayer.addListener("click", onMapClick);
+    }
+  }, [map, onMapClick]);
 
   return (
     <>
@@ -120,10 +124,27 @@ const LoadingScreen = ({ status }: { status: Status }) => (
 
 type MapPageProps = {
   data: IGraveLocations[] | null;
-  stats: PerOkrugStat[];
+  stats: OkrugMapData[];
 };
-
 const MapPage: React.FC<MapPageProps> = ({ data, stats }) => {
+  const [selectedOkrug, setSelectedOkrug] = useState<OkrugMapData>();
+  const { isOpen, openModal, closeModal, toggleModal } = useHashModal();
+
+  const handleMapClick = useCallback(
+    (event: any) => {
+      let feat = event.features[0] as google.maps.PlaceFeature;
+      if (!feat.placeId) return;
+      const okrug = stats.find((x) => x.mapId === feat.placeId);
+      if (selectedOkrug?.id === okrug?.id) {
+        toggleModal();
+      } else {
+        setSelectedOkrug(okrug);
+        openModal();
+      }
+    },
+    [openModal, selectedOkrug?.id, stats, toggleModal]
+  );
+
   if (data === null) {
     return <div>Error</div>;
   }
@@ -137,8 +158,13 @@ const MapPage: React.FC<MapPageProps> = ({ data, stats }) => {
         version="beta"
         render={(status: Status) => <LoadingScreen status={status} />}
       >
-        <Map center={center} zoom={zoom} locations={data} stats={stats} />
+        <Map onMapClick={handleMapClick} locations={data} stats={stats} />
       </Wrapper>
+      <StatDisplay
+        isOpen={isOpen}
+        closeModal={closeModal}
+        selectedOkrug={selectedOkrug}
+      />
     </div>
   );
 };

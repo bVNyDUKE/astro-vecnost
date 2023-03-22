@@ -1,17 +1,18 @@
 import { useState, useEffect, useCallback } from "react";
-import type { NameStat, LastnameStat, Graveyards, IOkrug } from "types";
+import type { NameStat, LastnameStat, Graveyards, OkrugMapData } from "types";
 import { NamesGraph, LastnameGraph } from "components/Graphs";
 import { Cross, Spinner } from "components/Icons";
 import SideDrawer from "components/SideDrawer";
 import { sp } from "supabase";
 
-export const StatPage: React.FC<{ selectedOkrug: IOkrug }> = ({
-  selectedOkrug,
-}) => {
+export const StatDisplay: React.FC<{
+  selectedOkrug?: OkrugMapData;
+  isOpen: boolean;
+  closeModal: () => void;
+}> = ({ selectedOkrug, isOpen, closeModal }) => {
   const [nameStats, setNameStats] = useState<[] | NameStat[]>([]);
   const [lastnameStats, setLastnameStats] = useState<[] | LastnameStat[]>([]);
   const [grobljeStats, setGrobljStats] = useState<[] | Graveyards[]>([]);
-  const [showModal, setShowModal] = useState(false);
 
   const getOkrugData = useCallback(async (okrugid: number) => {
     const [
@@ -36,7 +37,6 @@ export const StatPage: React.FC<{ selectedOkrug: IOkrug }> = ({
   useEffect(() => {
     if (selectedOkrug?.id) {
       getOkrugData(selectedOkrug.id);
-      setShowModal(true);
     }
   }, [getOkrugData, selectedOkrug?.id]);
 
@@ -47,10 +47,10 @@ export const StatPage: React.FC<{ selectedOkrug: IOkrug }> = ({
     nameStats.length !== 0;
 
   return (
-    <SideDrawer show={showModal}>
+    <SideDrawer show={isOpen}>
       <div className="absolute z-10 w-full border-y bg-white py-2">
         <Cross
-          onClick={() => setShowModal(false)}
+          onClick={closeModal}
           className="absolute top-3 right-2 h-5 w-5 border text-gray-500 shadow-sm"
         />
         <p className="text-center text-xl font-bold">Podaci okruga</p>
@@ -76,7 +76,7 @@ export const StatPage: React.FC<{ selectedOkrug: IOkrug }> = ({
                     href={`/pretraga?groblje=${graveyard.id}`}
                   >
                     <li className="box-border border p-8 hover:cursor-pointer hover:shadow-md">
-                      <a>{graveyard.name}</a>
+                      {graveyard.name}
                     </li>
                   </a>
                 ))}

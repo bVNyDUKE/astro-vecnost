@@ -90,6 +90,14 @@ export interface IOkrug {
   id: number;
 }
 
+export type OkrugMapData = {
+  id: number;
+  name: string;
+  mapId: string;
+  count: number;
+  fillColor: string;
+};
+
 interface Stat {
   total: number;
   percent: number;
