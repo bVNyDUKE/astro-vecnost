@@ -128,7 +128,7 @@ type MapPageProps = {
 };
 const MapPage: React.FC<MapPageProps> = ({ data, stats }) => {
   const [selectedOkrug, setSelectedOkrug] = useState<OkrugMapData>();
-  const { isOpen, openModal, closeModal } = useHashModal();
+  const { isOpen, openModal, closeModal, toggleModal } = useHashModal();
 
   const handleMapClick = useCallback(
     (event: any) => {
@@ -138,14 +138,13 @@ const MapPage: React.FC<MapPageProps> = ({ data, stats }) => {
       if (!okrug) return;
 
       if (selectedOkrug?.id === okrug.id) {
-        if (isOpen) closeModal();
-        else openModal();
+        toggleModal();
       } else {
         setSelectedOkrug(okrug);
         openModal();
       }
     },
-    [openModal, isOpen, selectedOkrug, stats, closeModal]
+    [openModal, selectedOkrug, stats, toggleModal]
   );
 
   if (data === null) {
