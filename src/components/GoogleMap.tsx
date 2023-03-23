@@ -128,21 +128,24 @@ type MapPageProps = {
 };
 const MapPage: React.FC<MapPageProps> = ({ data, stats }) => {
   const [selectedOkrug, setSelectedOkrug] = useState<OkrugMapData>();
-  const { isOpen, openModal, closeModal, toggleModal } = useHashModal();
+  const { isOpen, openModal, closeModal } = useHashModal();
 
   const handleMapClick = useCallback(
     (event: any) => {
       let feat = event.features[0] as google.maps.PlaceFeature;
       if (!feat.placeId) return;
       const okrug = stats.find((x) => x.mapId === feat.placeId);
-      if (selectedOkrug?.id === okrug?.id) {
-        toggleModal();
+      if (!okrug) return;
+
+      if (selectedOkrug?.id === okrug.id) {
+        if (isOpen) closeModal();
+        else openModal();
       } else {
         setSelectedOkrug(okrug);
         openModal();
       }
     },
-    [openModal, selectedOkrug?.id, stats, toggleModal]
+    [openModal, isOpen, selectedOkrug, stats, closeModal]
   );
 
   if (data === null) {

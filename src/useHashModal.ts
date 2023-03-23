@@ -16,12 +16,12 @@ export const useHashModal = () => {
   }, []);
 
   const toggleModal = useCallback(() => {
-    if (window.location.hash === "#open") {
+    if (isOpen) {
       closeModal();
     } else {
       openModal();
     }
-  }, [closeModal, openModal]);
+  }, [closeModal, openModal, isOpen]);
 
   useEffect(() => {
     const controller = new AbortController();
