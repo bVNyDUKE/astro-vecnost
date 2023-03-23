@@ -39,7 +39,7 @@ const stats = Okruzi.map((okrug) => {
 ---
 
 <Layout>
-  <MapPage client:load data={graveData} stats={stats} />
+  <MapPage client:only="react" data={graveData} stats={stats} />
 </Layout>
 <style is:inline>
   nav {
