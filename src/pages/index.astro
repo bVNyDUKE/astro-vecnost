@@ -8,11 +8,12 @@ import img1 from "assets/index_1.webp";
 import img2 from "assets/index_2.webp";
 import img3 from "assets/index_3.webp";
 import img4 from "assets/index_4.webp";
+import { Image } from "astro:assets";
 
 const data = [
   {
     id: 1,
-    imgSrc: img1,
+    img: img1,
     title: "Pretraga",
     content: "Pretražite sahranjena lica po imenu",
     href: "/pretraga",
@@ -20,7 +21,7 @@ const data = [
   },
   {
     id: 2,
-    imgSrc: img2,
+    img: img2,
     title: "Statistika",
     content: "Interkativna statistika",
     href: "/statistika",
@@ -28,7 +29,7 @@ const data = [
   },
   {
     id: 3,
-    imgSrc: img3,
+    img: img3,
     title: "Mapa",
     content: "Pronađite arhivirane lokacija na mapi",
     href: "/mapa",
@@ -36,7 +37,7 @@ const data = [
   },
   {
     id: 4,
-    imgSrc: img4,
+    img: img4,
     title: "Indeks",
     content: "Indeks svih arhiviranih lokacija",
     href: "/indeks",
@@ -47,11 +48,12 @@ const data = [
 
 <Layout title="Vecnost - Baza">
   <div class="container mx-auto text-center">
-    <img
+    <Image
       src={img.src}
       alt="Vecnost logo"
       class="hover:pointer mx-auto object-contain"
       width={90}
+      height={90}
     />
     <h1 class="mt-5 font-serif text-4xl font-bold text-secondary-dark">
       DOBRODOŠLI!
@@ -68,7 +70,7 @@ const data = [
       {
         data.map((d) => (
           <Section
-            imgSrc={d.imgSrc.src}
+            img={d.img}
             title={d.title}
             content={d.content}
             href={d.href}

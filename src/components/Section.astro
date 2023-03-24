@@ -1,20 +1,29 @@
 ---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
 interface Props {
-  imgSrc: string;
+  img: ImageMetadata;
   title: string;
   content: string;
   href: string;
   linkLabel: string;
 }
 
-const { imgSrc, title, content, href, linkLabel } = Astro.props;
+const { img, title, content, href, linkLabel } = Astro.props;
 ---
 
 <div class="group mx-auto mb-10 max-w-sm md:w-3/6 lg:mb-0 lg:w-3/12">
   <section
     class="relative flex h-64 flex-col overflow-hidden md:h-[240px] xl:h-[350px]"
   >
-    <img src={imgSrc} alt="image" class="t-0 l-0 z-05 absolute w-full" />
+    <Image
+      width={img.width}
+      height={img.height}
+      src={img.src}
+      alt="image"
+      class="t-0 l-0 z-05 absolute w-full"
+    />
     <div
       class="align-center visible z-10 flex grow flex-col justify-center p-5 transition delay-150 ease-in-out md:invisible md:group-hover:visible"
     >
