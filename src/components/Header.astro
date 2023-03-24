@@ -1,6 +1,5 @@
 ---
-import img from "../images/vecna-logo-solo-100.png";
-import { Image } from "@astrojs/image/components";
+import img from "assets/vecna-logo-solo-100.png";
 ---
 
 <nav
@@ -10,12 +9,11 @@ import { Image } from "@astrojs/image/components";
     <div class="container mx-auto items-center justify-between py-1.5 sm:flex">
       <a href="/">
         <div class="flex items-center justify-center">
-          <Image
-            src={img}
+          <img
+            src={img.src}
             alt="Vecnost logo"
             class="hover:pointer object-contain"
             width={65}
-            height={65}
           />
           <div
             class="text-2xl font-semibold sm:text-2xl"
@@ -37,12 +35,11 @@ import { Image } from "@astrojs/image/components";
   <div class="p-4 px-8 text-gray-500 sm:hidden">
     <div class="flex items-center justify-between">
       <a href="/" class="flex items-center gap-1">
-        <Image
-          src={img}
+        <img
+          src={img.src}
           alt="Vecnost logo"
           class="hover:pointer object-contain"
           width={40}
-          height={40}
         />
       </a>
       <div id="navBtn" data-open="false" class="cursor-pointer space-y-2">
