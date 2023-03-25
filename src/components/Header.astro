@@ -1,6 +1,5 @@
 ---
 import img from "assets/vecna-logo-solo-100.png";
-import { Image } from "astro:assets";
 ---
 
 <nav
@@ -10,7 +9,7 @@ import { Image } from "astro:assets";
     <div class="container mx-auto items-center justify-between py-1.5 sm:flex">
       <a href="/">
         <div class="flex items-center justify-center">
-          <Image
+          <img
             src={img.src}
             alt="Vecnost logo"
             class="hover:pointer object-contain"
@@ -37,7 +36,7 @@ import { Image } from "astro:assets";
   <div class="p-4 px-8 text-gray-500 sm:hidden">
     <div class="flex items-center justify-between">
       <a href="/" class="flex items-center gap-1">
-        <Image
+        <img
           src={img.src}
           alt="Vecnost logo"
           class="hover:pointer object-contain"
