@@ -12,9 +12,6 @@ export default defineConfig({
   experimental: {
     assets: true,
   },
-  image: {
-    service: "astro/assets/services/sharp",
-  },
   integrations: [react(), tailwind()],
   output: "server",
   adapter: vercel(),
