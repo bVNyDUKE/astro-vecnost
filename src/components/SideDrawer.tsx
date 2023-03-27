@@ -43,7 +43,7 @@ export default function SideDrawer({
     <ClientPortal show={show}>
       <Transition
         show={show}
-        className="fixed top-0 bottom-0 left-0 right-5 z-50 bg-white text-gray-700 lg:w-1/2"
+        className="fixed top-0 bottom-0 left-0 right-0 z-50 bg-white text-gray-700 lg:w-1/2"
         enter="transition delay-150 duration-500 ease-in-out"
         enterFrom="-translate-x-full"
         enterTo="translate-x-0"

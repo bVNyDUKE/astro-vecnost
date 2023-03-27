@@ -61,10 +61,10 @@ export const StatDisplay: React.FC<{
         </p>
         {statsAvailable ? (
           <div className="sm:mt-10">
-            <div className="relative h-[25vh]">
+            <div className="relative h-[35vh]">
               <NamesGraph nameStats={nameStats} />
             </div>
-            <div className="relative mt-10 h-[25vh]">
+            <div className="relative mt-10 h-[35vh]">
               <LastnameGraph lastnameStats={lastnameStats} />
             </div>
             <div className="justify-center p-10">
