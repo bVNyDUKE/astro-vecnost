@@ -3,12 +3,67 @@ export const prerender = true;
 
 import Layout from "layouts/Layout.astro";
 import List from "components/DataList/List.astro";
-import { regionData } from "regionData";
+import db from "db";
+import { sql } from "drizzle-orm";
+
+export type IndeksData = {
+  id: number;
+  name: string;
+  okrug: {
+    id: number;
+    name: string;
+    opstina: {
+      id: number;
+      name: string;
+      groblje: {
+        id: number;
+        name: string;
+      }[];
+    }[];
+  }[];
+};
+
+const indeksData = await db.execute<IndeksData>(
+  sql`
+    SELECT
+      region.id,
+      region.name,
+      json_agg(
+        json_build_object(
+          'id', okrug.id,
+          'name', okrug.name,
+          'opstina', (
+            SELECT json_agg(
+              json_build_object(
+                'id', opstina.id,
+                'name', opstina.name,
+                'groblje', (
+              SELECT json_agg(
+                json_build_object(
+                  'id', groblje.id,
+                  'name', groblje.name
+                )
+              ) FROM groblje WHERE groblje.opstina_id = opstina.id
+            )
+              )
+            )
+            FROM opstina
+            WHERE opstina.okrug_id = okrug.id
+          )
+        )
+      ) AS okrug
+    FROM region
+    LEFT JOIN okrug ON region.id = okrug.region_id
+    GROUP BY region.id, region.name;
+  `
+);
+
+console.log(indeksData);
 ---
 
 <Layout>
   <div class="container mx-auto max-w-lg">
     <h1 class="mb-10 text-center font-serif text-4xl">Indeks Mesta</h1>
-    <List data={regionData} title="Regioni" />
+    <List data={indeksData.rows} title="Regioni" />
   </div>
 </Layout>

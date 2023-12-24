@@ -24,6 +24,8 @@
     "astro": "^2.1.7",
     "chart.js": "^4.2.1",
     "chartjs-plugin-datalabels": "^2.0.0",
+    "drizzle-orm": "^0.23.2",
+    "pg": "^8.10.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
@@ -31,7 +33,9 @@
   },
   "devDependencies": {
     "@types/google.maps": "^3.52.2",
+    "@types/pg": "^8.6.6",
     "@typescript-eslint/parser": "^5.47.0",
+    "drizzle-kit": "^0.17.1",
     "eslint": "^8.30.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-astro": "^0.21.1",
