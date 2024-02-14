@@ -33,7 +33,7 @@ const { results } = Astro.props;
               </div>
               <div>
                 <span class="text-xl font-semibold">
-                  {result.ime} {result.prezime}
+                  {result.ime + " " + result.prezime}
                 </span>{" "}
                 <br />
                 <span class="text-secondary-dark">
@@ -43,7 +43,7 @@ const { results } = Astro.props;
               </div>
             </div>
 
-            <div class="text-secondary-dark mb-3 hidden px-5 md:mb-0 md:block md:w-3/6 md:bg-gray-200 md:p-5">
+            <div class="mb-3 hidden px-5 text-secondary-dark md:mb-0 md:block md:w-3/6 md:bg-gray-200 md:p-5">
               <div class="text-lg font-semibold ">Groblje</div>
               <span>{result?.groblje?.name}</span>
             </div>
