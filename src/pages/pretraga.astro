@@ -114,15 +114,16 @@ const pages = Math.ceil(resultCount ?? 1 / 10);
   }
 </Layout>
 
-<script lang="js">
+<script>
   document.addEventListener("astro:page-load", () => {
-    const handlePageChange = (e) => {
+    const handlePageChange = (e: Event) => {
+      const btn = e.target as HTMLButtonElement;
       const params = new URL(document.location.toString()).searchParams;
-      params.set("page", e.currentTarget?.dataset?.page);
-      window.history.pushState(
-        { ...window.history.state, page: e.currentTarget?.dataset.page },
-        ""
-      );
+      const page = btn?.dataset?.page;
+      if (!page) return;
+      params.set("page", page);
+
+      window.history.pushState({ ...window.history.state, page }, "");
       window.location.replace(
         `${document.location.origin}/pretraga?${params.toString()}`
       );

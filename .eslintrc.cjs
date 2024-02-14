@@ -12,6 +12,7 @@ module.exports = {
         parser: "@typescript-eslint/parser",
         extraFileExtensions: [".astro"],
       },
+      processor: "astro/client-side-ts",
       rules: {
         // override/add rules settings here, such as:
         // "astro/no-set-html-directive": "error"
