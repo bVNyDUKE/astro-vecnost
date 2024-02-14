@@ -56,6 +56,7 @@ import { Image } from "astro:assets";
     </div>
     <div
       id="navMenu"
+      transition:animate="fade"
       class="fixed left-0 top-[73px] h-screen w-screen translate-x-full overflow-hidden bg-white p-12 transition duration-500 ease-out"
     >
       <a class="block p-4 font-semibold uppercase" href="/">Početna</a>
@@ -69,34 +70,37 @@ import { Image } from "astro:assets";
   </div>
 </nav>
 
-<script lang="js">
-  const navBtn = document.querySelector("#navBtn");
-  const navMenu = document.querySelector("#navMenu");
-  const first = navBtn.querySelector("div:nth-of-type(1)");
-  const second = navBtn.querySelector("div:nth-of-type(2)");
-  const third = navBtn.querySelector("div:nth-of-type(3)");
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const navBtn = document.querySelector("#navBtn");
+    const navMenu = document.querySelector("#navMenu");
+    const first = navBtn?.querySelector("div:nth-of-type(1)");
+    const second = navBtn?.querySelector("div:nth-of-type(2)");
+    const third = navBtn?.querySelector("div:nth-of-type(3)");
 
-  navBtn.addEventListener("click", () => {
-    const navVal = navBtn.getAttribute("data-open");
+    navBtn?.addEventListener("click", () => {
+      console.log("clicked");
+      const navVal = navBtn.getAttribute("data-open");
 
-    if (navVal == "false") {
-      navBtn.setAttribute("data-open", "true");
-      document.body.style.overflow = "hidden";
+      if (navVal == "false") {
+        navBtn.setAttribute("data-open", "true");
+        document.body.style.overflow = "hidden";
 
-      first.classList.add("translate-y-[10px]", "rotate-45");
-      second.classList.add("invisible");
-      third.classList.add("translate-y-[-10px]", "rotate-[-45deg]");
+        first?.classList.add("translate-y-[10px]", "rotate-45");
+        second?.classList.add("invisible");
+        third?.classList.add("translate-y-[-10px]", "rotate-[-45deg]");
 
-      navMenu.classList.remove("translate-x-full");
-    } else {
-      navBtn.setAttribute("data-open", "false");
-      document.body.removeAttribute("style");
+        navMenu?.classList.remove("translate-x-full");
+      } else {
+        navBtn.setAttribute("data-open", "false");
+        document.body.removeAttribute("style");
 
-      first.classList.remove("translate-y-[10px]", "rotate-45");
-      second.classList.remove("invisible");
-      third.classList.remove("translate-y-[-10px]", "rotate-[-45deg]");
+        first?.classList.remove("translate-y-[10px]", "rotate-45");
+        second?.classList.remove("invisible");
+        third?.classList.remove("translate-y-[-10px]", "rotate-[-45deg]");
 
-      navMenu.classList.add("translate-x-full");
-    }
+        navMenu?.classList.add("translate-x-full");
+      }
+    });
   });
 </script>

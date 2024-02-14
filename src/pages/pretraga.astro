@@ -115,20 +115,30 @@ const pages = Math.ceil(resultCount ?? 1 / 10);
 </Layout>
 
 <script lang="js">
-  const handlePageChange = (e) => {
-    const params = new URL(document.location.toString()).searchParams;
-    params.set("page", e.currentTarget?.dataset?.page);
-    window.history.pushState(
-      { ...window.history.state, page: e.currentTarget?.dataset.page },
-      ""
-    );
-    window.location.replace(
-      `${document.location.origin}/pretraga?${params.toString()}`
-    );
-  };
+  document.addEventListener("astro:page-load", () => {
+    const handlePageChange = (e) => {
+      const params = new URL(document.location.toString()).searchParams;
+      params.set("page", e.currentTarget?.dataset?.page);
+      window.history.pushState(
+        { ...window.history.state, page: e.currentTarget?.dataset.page },
+        ""
+      );
+      window.location.replace(
+        `${document.location.origin}/pretraga?${params.toString()}`
+      );
+    };
 
-  document.querySelector("#first")?.addEventListener("click", handlePageChange);
-  document.querySelector("#prev")?.addEventListener("click", handlePageChange);
-  document.querySelector("#next")?.addEventListener("click", handlePageChange);
-  document.querySelector("#last")?.addEventListener("click", handlePageChange);
+    document
+      .querySelector("#first")
+      ?.addEventListener("click", handlePageChange);
+    document
+      .querySelector("#prev")
+      ?.addEventListener("click", handlePageChange);
+    document
+      .querySelector("#next")
+      ?.addEventListener("click", handlePageChange);
+    document
+      .querySelector("#last")
+      ?.addEventListener("click", handlePageChange);
+  });
 </script>
