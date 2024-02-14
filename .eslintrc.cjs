@@ -19,7 +19,7 @@ module.exports = {
       },
     },
     {
-      files: ["*.ts", "*.tsx"],
+      files: ["*.ts", "*.tsx", "*.mjs"],
       parser: "@typescript-eslint/parser",
       parserOptions: {
         ecmaVersion: 2020,
