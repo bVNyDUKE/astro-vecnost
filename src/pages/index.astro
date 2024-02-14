@@ -8,7 +8,7 @@ import img1 from "../images/index_1.webp";
 import img2 from "../images/index_2.webp";
 import img3 from "../images/index_3.webp";
 import img4 from "../images/index_4.webp";
-import { Image } from "@astrojs/image/components";
+import { Image } from "astro:assets";
 
 const data = [
   {
@@ -52,8 +52,6 @@ const data = [
       src={img}
       alt="Vecnost logo"
       class="hover:pointer mx-auto object-contain"
-      width={90}
-      height={100}
     />
     <h1 class="mt-5 font-serif text-4xl font-bold text-secondary-dark">
       DOBRODOŠLI!

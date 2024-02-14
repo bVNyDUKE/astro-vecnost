@@ -1,8 +1,10 @@
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import type { RegionData } from "../../types";
 import { Magnifier, AdjustmentsIcon } from "../Icons";
 import OptionDropdown from "../OptionsDropdown";
+
+import type { RegionData } from "../../types";
+import type { FormEvent } from "react";
 
 const AcceptedFilters = {
   opstina: "opstina",
