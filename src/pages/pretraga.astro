@@ -13,8 +13,9 @@ const opstina = Astro.url.searchParams.get("opstina");
 const okrug = Astro.url.searchParams.get("okrug");
 const page = +(Astro.url.searchParams.get("page") || 1);
 
-const rangeFrom = page - 1 * 10 || 0;
-const rangeTo = page * 10 || 10;
+const from = (page - 1) * 10 || 0;
+const to = from + 9;
+
 let query = sp
   .from("persons")
   .select(
@@ -23,8 +24,7 @@ let query = sp
       count: "exact",
     }
   )
-  .limit(10)
-  .range(rangeFrom, rangeTo);
+  .range(from, to);
 
 if (ime && typeof ime === "string" && ime !== "all") {
   query = query.textSearch("fts", ime as string, {
