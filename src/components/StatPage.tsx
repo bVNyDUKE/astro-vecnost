@@ -50,12 +50,11 @@ export default function StatPage({
 
   useEffect(() => setStartTransition(true), []);
 
-  useEffect(() => {
-    if (selectedOkrug?.id) {
-      getOkrugData(selectedOkrug.id);
-      setShowModal(true);
-    }
-  }, [getOkrugData, selectedOkrug?.id]);
+  const handleSelectOkrug = (okrug: IOkrug) => {
+    setSelectedOkrug(okrug);
+    getOkrugData(okrug.id);
+    setShowModal(true);
+  };
 
   const statsAvailable =
     grobljeStats &&
@@ -86,7 +85,7 @@ export default function StatPage({
         </div>
         <MapContainer
           selectedOkrugId={selectedOkrug?.id || null}
-          setSelectedOkrug={setSelectedOkrug}
+          setSelectedOkrug={handleSelectOkrug}
           setShowModal={setShowModal}
           personsPerOkrug={personsPerOkrug}
         />
@@ -120,7 +119,7 @@ export default function StatPage({
                       href={`/pretraga?groblje=${graveyard.id}`}
                     >
                       <li className="box-border border p-8 hover:cursor-pointer hover:shadow-md">
-                        <a>{graveyard.name}</a>
+                        {graveyard.name}
                       </li>
                     </a>
                   ))}

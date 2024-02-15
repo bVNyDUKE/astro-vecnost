@@ -1,12 +1,5 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import type { IOkrug, PersonsPerOkrugStat } from "../../types";
 import MapRegion from "./MapRegion";
 import { Okruzi } from "./MapData";
@@ -33,7 +26,7 @@ export default function MapContainer({
   personsPerOkrug,
 }: {
   selectedOkrugId: number | null;
-  setSelectedOkrug: Dispatch<SetStateAction<IOkrug | null>>;
+  setSelectedOkrug: (e: IOkrug) => void;
   setShowModal: Dispatch<SetStateAction<boolean>>;
   personsPerOkrug: PersonsPerOkrugStat[] | null;
 }) {
