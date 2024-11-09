@@ -9,7 +9,12 @@ import Layout from "src/layouts/Layout.astro";
     is:inline
     src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"
   ></script>
-  <script defer lang="js">
+  <script
+    is:inline
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0ThvNWgF8MzcDV5r-hIZ--WzVENqj72M&callback=initMap&v=weekly"
+    defer
+  ></script>
+  <script is:inline lang="js">
     const locations = [
       {
         id: 30,
@@ -253,11 +258,6 @@ import Layout from "src/layouts/Layout.astro";
     window.initMap = initMap;
   </script>
   <div id="map" class="flex min-h-screen"></div>
-  <script
-    is:inline
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0ThvNWgF8MzcDV5r-hIZ--WzVENqj72M&callback=initMap&v=weekly"
-    defer
-  ></script>
 </Layout>
 <style is:inline>
   nav {
