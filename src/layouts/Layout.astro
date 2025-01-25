@@ -1,7 +1,6 @@
 ---
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
-import { ClientRouter } from "astro:transitions";
 ---
 
 <!DOCTYPE html>
@@ -29,10 +28,9 @@ import { ClientRouter } from "astro:transitions";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Vecnost - Baza</title>
-    <ClientRouter />
   </head>
   <body>
-    <Header transition:persist />
+    <Header />
     <main>
       <slot />
     </main>

@@ -1,4 +1,5 @@
 ---
+export const prerender = false;
 import ResultList from "src/components/Search/ResultList.astro";
 import Layout from "src/layouts/Layout.astro";
 import type { RegionData, SearchResult } from "src/types";
@@ -115,31 +116,21 @@ const pages = Math.ceil(resultCount ?? 1 / 10);
 </Layout>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
-    const handlePageChange = (e: Event) => {
-      const btn = e.target as HTMLButtonElement;
-      const params = new URL(document.location.toString()).searchParams;
-      const page = btn?.dataset?.page;
-      if (!page) return;
-      params.set("page", page);
+  const handlePageChange = (e: Event) => {
+    const btn = e.target as HTMLButtonElement;
+    const params = new URL(document.location.toString()).searchParams;
+    const page = btn?.dataset?.page;
+    if (!page) return;
+    params.set("page", page);
 
-      window.history.pushState({ ...window.history.state, page }, "");
-      window.location.replace(
-        `${document.location.origin}/pretraga?${params.toString()}`
-      );
-    };
-
+    window.history.pushState({ ...window.history.state, page }, "");
+    window.location.replace(
+      `${document.location.origin}/pretraga?${params.toString()}`
+    );
+  };
+  ["#first", "#prev", "#next", "#last"].forEach((selector) => {
     document
-      .querySelector("#first")
-      ?.addEventListener("click", handlePageChange);
-    document
-      .querySelector("#prev")
-      ?.addEventListener("click", handlePageChange);
-    document
-      .querySelector("#next")
-      ?.addEventListener("click", handlePageChange);
-    document
-      .querySelector("#last")
+      .querySelector(selector)
       ?.addEventListener("click", handlePageChange);
   });
 </script>
