@@ -9,7 +9,7 @@ const { results } = Astro.props;
 ---
 
 {
-  results === null || results === undefined || results.length === 0 ? (
+  results === null || results === undefined ? null : results.length === 0 ? (
     <div class="m-auto">Nema rezultata za ovu pretragu</div>
   ) : (
     <div class="w-full px-5">
