@@ -118,9 +118,9 @@ export default function SearchBar({
               className="h-full flex-grow p-5 focus:outline-none"
             />
           </div>
-          <div className="flex h-16 w-28 flex-grow border-l ">
+          <div className="flex h-16 w-28 flex-grow border-l border-gray-300">
             <button
-              className="flex h-full w-full flex-grow items-center justify-center border-r hover:shadow-md"
+              className="flex h-full w-full flex-grow items-center justify-center border-r border-gray-300 hover:shadow-md"
               type="submit"
             >
               {icon}

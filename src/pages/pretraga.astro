@@ -116,7 +116,7 @@ const pages = Math.ceil(resultCount ?? 1 / 10);
 </Layout>
 
 <script>
-  const handlePageChange = (e: Event) => {
+  function handlePageChange(e: Event) {
     const btn = e.target as HTMLButtonElement;
     const params = new URL(document.location.toString()).searchParams;
     const page = btn?.dataset?.page;
@@ -127,7 +127,7 @@ const pages = Math.ceil(resultCount ?? 1 / 10);
     window.location.replace(
       `${document.location.origin}/pretraga?${params.toString()}`
     );
-  };
+  }
   ["#first", "#prev", "#next", "#last"].forEach((selector) => {
     document
       .querySelector(selector)

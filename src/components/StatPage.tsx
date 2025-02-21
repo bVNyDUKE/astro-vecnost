@@ -56,6 +56,8 @@ export default function StatPage({
     setShowModal(true);
   };
 
+  const closeModal = () => setShowModal(false);
+
   const statsAvailable =
     grobljeStats &&
     grobljeStats.length !== 0 &&
@@ -91,10 +93,10 @@ export default function StatPage({
         />
       </Transition>
       <SideDrawer show={showModal}>
-        <div className="absolute z-10 w-full border-y bg-white py-2">
+        <div className="absolute z-10 w-full border-y border-gray-300 bg-white py-2">
           <Cross
-            onClick={() => setShowModal(false)}
-            className="absolute top-3 right-2 h-5 w-5 border text-gray-500 shadow-sm"
+            onClick={closeModal}
+            className="absolute top-3 right-2 h-5 w-5 cursor-pointer text-gray-500"
           />
           <p className="text-center text-xl font-bold">Podaci okruga</p>
         </div>
@@ -118,7 +120,7 @@ export default function StatPage({
                       key={graveyard.id}
                       href={`/pretraga?groblje=${graveyard.id}`}
                     >
-                      <li className="mt-1 box-border border p-8 hover:cursor-pointer hover:shadow-md">
+                      <li className="mt-1 box-border border border-gray-300 p-8 hover:cursor-pointer hover:shadow-md">
                         {graveyard.name}
                       </li>
                     </a>
