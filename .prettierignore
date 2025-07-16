@@ -1,0 +1,4 @@
+# build files
+.vercel
+.astro
+.vscode
